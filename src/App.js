@@ -7,8 +7,10 @@ import pencil from './images/simpleiconDOTcom-pen-15-64x64.png'
 
 let baseURL = ''
 
+console.log(__dirname)
+
 if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://localhost:3003'
+  baseURL = 'http://localhost:3004'
 } else {
   baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
 }
