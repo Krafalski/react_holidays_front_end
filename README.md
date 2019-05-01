@@ -34,6 +34,11 @@ https://facebook.github.io/create-react-app/docs/deployment
 
 https://www.npmjs.com/package/env-cmd
 
+
+Solved:
+
+`heroku buildpacks:set mars/create-react-app` will now set production in deployed heroku site
+
 In the project directory, you can run:
 
 ### `npm start`
