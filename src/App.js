@@ -7,7 +7,7 @@ import pencil from './images/simpleiconDOTcom-pen-15-64x64.png'
 import Show from './components/Show.js'
 import UpdateForm from './components/UpdateForm.js'
 
-
+console.log('what am I?', process.env)
 const baseURL = process.env.REACT_APP_API_URL
 
 console.log(baseURL)
