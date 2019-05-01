@@ -52,7 +52,7 @@ img:hover {
 ****************************************************/
 
 .modal {
-  /* background-image: url('../assets/memphis-colorful.png'); */
+  background-image: url('./images/memphis-colorful.png');
   position: fixed;
   margin: 0 10vw;
   padding-top: 3em;
