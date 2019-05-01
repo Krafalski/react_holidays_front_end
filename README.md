@@ -4,6 +4,32 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 see it on heroku here: https://dry-beach-87683.herokuapp.com/
 ## Available Scripts
 
+
+To run locally:
+`npm run build:dev` to choose localhost for api back end
+
+Hacky way to choose the heroku hosted backend/api. Would be nice to solve for a better way to let students work seamlessly between the two
+
+Problems
+- ![](https://i.imgur.com/HXvnsFz.png)
+ even though Heroku says the env is production it still logs as development (in src/App.js)
+-  added a lot of scripts to no avail
+```
+"scripts": {
+  "start": "react-scripts start",
+  "build": "env-cmd .env.heroku react-scripts build",
+  "build:heroku": "env-cmd .env.heroku npm run build",
+  "build:dev": "env-cmd .env.dev react-scripts start",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
+  "heroku-postbuild": "env-cmd .env.heroku react-scripts build"
+},
+```
+
+`env-cmd` works locally with `npm run build:dev` behaves as expected but will not work for heroku build. Even though I have told heroku to run it. Is it time for a procfile or something?
+
+
+
 In the project directory, you can run:
 
 ### `npm start`
