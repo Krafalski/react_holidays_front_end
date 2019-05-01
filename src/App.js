@@ -8,6 +8,7 @@ import Show from './components/Show.js'
 import UpdateForm from './components/UpdateForm.js'
 
 let baseURL = ''
+console.log(process.env)
 if (process.env.REACT_APP_API_URL) {
   baseURL = process.env.REACT_APP_API_URL
 } else {

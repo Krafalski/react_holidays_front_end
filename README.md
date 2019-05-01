@@ -28,7 +28,11 @@ Problems
 
 `env-cmd` works locally with `npm run build:dev` behaves as expected but will not work for heroku build. Even though I have told heroku to run it. Is it time for a procfile or something?
 
+Details:
 
+https://facebook.github.io/create-react-app/docs/deployment
+
+https://www.npmjs.com/package/env-cmd
 
 In the project directory, you can run:
 
