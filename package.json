@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "env-cmd .env.heroku react-scripts build",
     "build:heroku": "env-cmd .env.heroku npm run build",
     "build:dev": "env-cmd .env.dev react-scripts start",
     "test": "react-scripts test",
