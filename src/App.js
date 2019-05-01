@@ -7,8 +7,13 @@ import pencil from './images/simpleiconDOTcom-pen-15-64x64.png'
 import Show from './components/Show.js'
 import UpdateForm from './components/UpdateForm.js'
 
-console.log('what am I?', process.env)
-const baseURL = process.env.REACT_APP_API_URL
+let baseURL = ''
+if (process.env.REACT_APP_API_URL) {
+  baseURL = process.env.REACT_APP_API_URL
+} else {
+  baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
+}
+
 
 console.log(baseURL)
 // if (process.env.NODE_ENV === 'development') {
