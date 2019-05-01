@@ -40,6 +40,8 @@ Solved:
 `heroku buildpacks:set mars/create-react-app` will now set production in deployed heroku site
 
 
+don't forget to add node engines etc...
+
 other ideas .env - then add custom in heroku app under settings?
 
 would need to test accessibility
