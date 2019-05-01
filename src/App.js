@@ -167,8 +167,8 @@ class App extends React.Component {
           </tbody>
         </table>
         { this.state.holiday
-          ? <Show holiday={this.state.holiday}
-          : null />}
+          ? <Show holiday={this.state.holiday}/>
+          : null }
        </>
        { this.state.showForm
          ? <UpdateForm holiday={this.state.holiday}             toggleUpdateForm={this.toggleUpdateForm}
