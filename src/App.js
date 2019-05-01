@@ -6,13 +6,16 @@ import ballons from './images/two-balloon-icons-68911.png'
 import pencil from './images/simpleiconDOTcom-pen-15-64x64.png'
 import Show from './components/Show.js'
 import UpdateForm from './components/UpdateForm.js'
-let baseURL = ''
 
-if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://localhost:3004'
-} else {
-  baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
-}
+
+const baseURL = process.env.REACT_APP_API_URL
+
+console.log(baseURL)
+// if (process.env.NODE_ENV === 'development') {
+//   baseURL = 'http://localhost:3004'
+// } else {
+//   baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
+// }
 
 class App extends React.Component {
   constructor (props) {
