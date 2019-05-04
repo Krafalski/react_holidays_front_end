@@ -1,3 +1,4 @@
+
 /** {
   border: 1px solid teal;
 }*/
@@ -52,14 +53,14 @@ img:hover {
 ****************************************************/
 
 .modal {
-  background-image: url('./images/memphis-colorful.png');
+  background-image: url('../images/memphis-colorful.png');
   position: fixed;
   margin: 0 10vw;
   padding-top: 3em;
   top: 3em;
   left: 0;
-  height: 80%;
-  width: 80%;
+  height: 90%;
+  width: 90%;
   z-index: 2;
   overflow: auto;
   display : none;
