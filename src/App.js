@@ -4,20 +4,14 @@ import './css/skeleton.css'
 import './css/index.css'
 // import ballons from './images/two-balloon-icons-68911.png'
 // import pencil from './images/simpleiconDOTcom-pen-15-64x64.png'
+import NewForm from './components/NewForm.js'
 // import Show from './components/Show.js'
 // import UpdateForm from './components/UpdateForm.js'
-let baseURL = ''
+let baseURL = process.env.REACT_APP_BASEURL
 
-if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://localhost:3004'
-} else {
-  baseURL = 'your heroku bakend url here'
-}
+//alternate baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
 
-// baseURL = 'https://fathomless-sierra-68956.herokuapp.com'
 console.log('current base URL:', baseURL)
-
-
 
 class App extends React.Component {
  constructor(props) {
@@ -26,32 +20,18 @@ class App extends React.Component {
      holidays: []
    }
    this.getHolidays = this.getHolidays.bind(this)
-   this.handleChange = this.handleChange.bind(this)
-   this.handleSubmit = this.handleSubmit.bind(this)
+   this.handleAddHoliday = this.handleAddHoliday.bind(this)
  }
  componentDidMount(){
   this.getHolidays()
 }
-handleChange (event) {
-  this.setState({ [event.currentTarget.id]: event.currentTarget.value})
-}
-handleSubmit (event) {
-  event.preventDefault()
-  fetch(baseURL + '/holidays', {
-    method: 'POST',
-    body: JSON.stringify({name: this.state.name}),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then (res => res.json())
-    .then (resJson => {
-    const copyHolidays = [...this.state.holidays]
-    copyHolidays.push(resJson)
-    this.setState({
-      holidays: copyHolidays,
-      name: ''
-    })
-  }).catch (error => console.error({'Error': error}))
+handleAddHoliday(holiday) {
+  const copyHolidays = [...this.state.holidays]
+  copyHolidays.unshift(holiday)
+  this.setState({
+    holidays: copyHolidays,
+    name: ''
+  })
 }
  getHolidays() {
    fetch(baseURL+ '/holidays')
@@ -65,12 +45,13 @@ handleSubmit (event) {
    return (
      <div className='container'>
       <h1>Holidays! Celebrate!</h1>
+      <NewForm handleAddHoliday={this.handleAddHoliday}/>
       <table>
         <tbody>
           { this.state.holidays.map(holiday => {
               return (
-                <tr>
-                  <td key={holiday._id} > {holiday.name }</td>
+                <tr key={holiday._id} >
+                  <td> {holiday.name }</td>
                 </tr>
               )
             })
