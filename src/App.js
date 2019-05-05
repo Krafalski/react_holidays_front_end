@@ -19,6 +19,7 @@ class App extends React.Component {
    this.state = {
      holidays: []
    }
+   this.deleteHoliday = this.deleteHoliday.bind(this)
    this.getHolidays = this.getHolidays.bind(this)
    this.handleAddHoliday = this.handleAddHoliday.bind(this)
  }
@@ -32,6 +33,16 @@ handleAddHoliday(holiday) {
     holidays: copyHolidays,
     name: ''
   })
+}
+deleteHoliday (id) {
+fetch(baseURL + '/holidays/' + id, {
+  method: 'DELETE'
+}).then( response => {
+  const findIndex = this.state.holidays.findIndex(holiday => holiday._id === id)
+  const copyHolidays = [...this.state.holidays]
+  copyHolidays.splice(findIndex, 1)
+  this.setState({holidays: copyHolidays})
+})
 }
  getHolidays() {
    fetch(baseURL+ '/holidays')
@@ -52,6 +63,7 @@ handleAddHoliday(holiday) {
               return (
                 <tr key={holiday._id} >
                   <td> {holiday.name }</td>
+                  <td onClick={()=>this.deleteHoliday(holiday._id)}>X</td>
                 </tr>
               )
             })
