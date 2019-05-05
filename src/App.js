@@ -2,10 +2,10 @@ import React from 'react'
 import './css/normalize.css'
 import './css/skeleton.css'
 import './css/index.css'
-// import ballons from './images/two-balloon-icons-68911.png'
+import ballons from './images/two-balloon-icons-68911.png'
 // import pencil from './images/simpleiconDOTcom-pen-15-64x64.png'
 import NewForm from './components/NewForm.js'
-// import Show from './components/Show.js'
+import Show from './components/Show.js'
 // import UpdateForm from './components/UpdateForm.js'
 let baseURL = process.env.REACT_APP_BASEURL
 
@@ -20,8 +20,10 @@ class App extends React.Component {
      holidays: []
    }
    this.deleteHoliday = this.deleteHoliday.bind(this)
+   this.getHoliday = this.getHoliday.bind(this)
    this.getHolidays = this.getHolidays.bind(this)
    this.handleAddHoliday = this.handleAddHoliday.bind(this)
+   this.toggleCelebrated = this.toggleCelebrated.bind(this)
  }
  componentDidMount(){
   this.getHolidays()
@@ -44,6 +46,9 @@ fetch(baseURL + '/holidays/' + id, {
   this.setState({holidays: copyHolidays})
 })
 }
+getHoliday(holiday) {
+  this.setState({holiday: holiday})
+}
  getHolidays() {
    fetch(baseURL+ '/holidays')
      .then(data => {
@@ -52,6 +57,21 @@ fetch(baseURL + '/holidays/' + id, {
      .then(parsedData => this.setState({holidays: parsedData}),
       err=> console.log(err))
  }
+ toggleCelebrated (holiday) {
+  fetch(baseURL + '/holidays/' + holiday._id, {
+    method: 'PUT',
+    body: JSON.stringify({celebrated: !holiday.celebrated}),
+    headers: {
+      'Content-Type' : 'application/json'
+    }
+  }).then(res => res.json())
+  .then(resJson => {
+       const copyHolidays = [...this.state.holidays]
+        const findIndex = this.state.holidays.findIndex(holiday => holiday._id === resJson._id)
+        copyHolidays[findIndex].celebrated = resJson.celebrated
+        this.setState({holidays: copyHolidays})
+  })
+}
   render () {
    return (
      <div className='container'>
@@ -61,8 +81,16 @@ fetch(baseURL + '/holidays/' + id, {
         <tbody>
           { this.state.holidays.map(holiday => {
               return (
-                <tr key={holiday._id} >
-                  <td> {holiday.name }</td>
+                <tr key={holiday._id} onMouseOver={() => this.getHoliday(holiday)}>
+                <td
+                  onDoubleClick={() => this.toggleCelebrated(holiday)}
+                  className={holiday.celebrated
+                    ? 'celebrated'
+                    :
+                    null}
+                >{holiday.name} Day</td>
+                <td>{holiday.likes}</td>
+                <td onClick={() => this.updateLikes(holiday)}><img src={ballons} alt="ballons"/></td>
                   <td onClick={()=>this.deleteHoliday(holiday._id)}>X</td>
                 </tr>
               )
@@ -70,6 +98,9 @@ fetch(baseURL + '/holidays/' + id, {
           }
         </tbody>
       </table>
+      { this.state.holiday
+        ? <Show holiday={this.state.holiday}/>
+        : null }
      </div>
    )
  }
