@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "env-cmd": "^8.0.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.0",
@@ -10,9 +11,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "env-cmd .env.heroku react-scripts build",
+    "build:heroku": "env-cmd .env.heroku npm run build",
+    "build:dev": "env-cmd .env.dev react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "env-cmd .env.heroku react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
